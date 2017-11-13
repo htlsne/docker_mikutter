@@ -8,11 +8,11 @@ ruby 2.4.1 の環境で mikutter を git から落としてきます
 # 使い方
 コンテナイメージ作成
 ```
-$ git clone https://github.com/Na0ki/docker_mikutter.git
+$ git clone https://github.com/orumin/docker_mikutter.git
 $ cd docker_mikutter
 $ docker-compose up --build
 ```
 
 # 作った環境
-CentOS Linux release 7.3.1611  
-Docker version 1.12.6, build 78d1802
+ArchLinux
+Docker version 17.10.0-ce, build f4ffd2511c
