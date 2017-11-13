@@ -27,7 +27,6 @@ WORKDIR ${WORK_DIR}
 RUN set -x && \
 	git clone git://toshia.dip.jp/mikutter.git && \
     cd mikutter && \
-    git checkout develop && \
     bundle install
 
 ENTRYPOINT ["/usr/local/bundle/bin/bundle", "exec", "/home/mikutter/mikutter/mikutter.rb"]
