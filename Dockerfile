@@ -1,4 +1,4 @@
-FROM ruby:alpine
+FROM ruby:2.4.1
 MAINTAINER orumin
 
 ARG WORK_DIR="/home/mikutter"
@@ -7,12 +7,18 @@ ARG USER_NAME="mikutter"
 ARG USER_ID="1000"
 
 RUN set -x \
-    && apk upgrade --update \
-    && apk --no-cache add \
-      gcc musl-dev make g++ file alpine-sdk git \
-      gtk+2.0-dev gobject-introspection-dev \
+    && apt-get update \
+	&& apt-get install -y \
+	  libpango1.0-dev \
+	  libgtk2.0-dev \
+	  libatk1.0-dev \
+	  libgirepository1.0-dev \
+	  git \
+	  build-essential \
     \
-	&& adduser -D -u ${USER_ID} -h ${WORK_DIR} ${USER_NAME}
+	&& groupadd --system -g 1000 mikutter \
+	&& useradd -m -s /bin/bash -g mikutter -u 1000 -d /home/mikutter mikutter \
+	&& echo mikutter:mikutter | chpasswd
 
 USER ${USER_NAME}
 
