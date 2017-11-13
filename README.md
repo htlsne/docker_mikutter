@@ -1,18 +1,20 @@
-# docker\_mikutter
-ておくれをコンテナに凝縮した
+# What's This
+TEOKURE condensed container within [mikutter](https://mikutter.hachune.net)
 
-# なんこれ
-mikutter の develop ブランチ環境をお手軽に構築できてしまうておくれたコンテナ  
-ruby 2.4.1 の環境で mikutter を git から落としてきます
-
-# 使い方
-コンテナイメージ作成
+# How to Use
 ```
 $ git clone https://github.com/orumin/docker_mikutter.git
 $ cd docker_mikutter
 $ docker-compose up --build
 ```
 
-# 作った環境
+or
+
+```
+$ docker pull orumin/mikutter:latest
+$ docker run -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ orumin/mikutter:latest
+```
+
+# Tested Environment
 ArchLinux
 Docker version 17.10.0-ce, build f4ffd2511c

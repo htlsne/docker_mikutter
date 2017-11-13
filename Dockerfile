@@ -23,3 +23,5 @@ RUN set -x && \
     cd mikutter && \
     git checkout develop && \
     bundle install
+
+ENTRYPOINT ["/usr/local/bundle/bin/bundle", "exec", "/home/mikutter/mikutter/mikutter.rb"]
