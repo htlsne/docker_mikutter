@@ -16,18 +16,18 @@ RUN set -x \
 	  git \
 	  build-essential \
     \
-	&& groupadd --system -g 1000 mikutter \
-	&& useradd -m -s /bin/bash -g mikutter -u 1000 -d /home/mikutter mikutter \
-	&& echo mikutter:mikutter | chpasswd
+	&& groupadd --system -g ${USER_ID} ${USER_NAME} \
+	&& useradd -m -s /bin/bash -g ${USER_NAME} -u ${USER_ID} -d ${WORK_DIR} ${USER_NAME} \
+	&& echo ${USER_NAME}:${USER_NAME} | chpasswd
 
 USER ${USER_NAME}
 
-WORKDIR ${WORK_DIR}
+RUN set -x \
+    && cd ${WORK_DIR} \
+	&& git clone git://toshia.dip.jp/mikutter.git \
+      && cd mikutter \
+      && bundle install
 
-RUN set -x && \
-	git clone git://toshia.dip.jp/mikutter.git && \
-    cd mikutter && \
-    git checkout develop && \
-    bundle install
+WORKDIR ${WORK_DIR}/mikutter
 
-ENTRYPOINT ["/usr/local/bundle/bin/bundle", "exec", "/home/mikutter/mikutter/mikutter.rb"]
+CMD ["/usr/local/bin/bundle", "exec", "/home/mikutter/mikutter/mikutter.rb"]
