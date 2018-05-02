@@ -2,11 +2,14 @@
 TEOKURE condensed container within [mikutter](https://mikutter.hachune.net)
 
 # How to Use
+On macOS
+
 ```
-$ docker pull orumin/mikutter:latest
-$ docker run -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ orumin/mikutter:latest
+$ docker build -t mikutter .
+$ socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:\"$DISPLAY\" &
+$ docker run -e DISPLAY=`ifconfig en0 | grep inet | awk '$1=="inet" {print $2}'`:0 mikutter
 ```
 
 # Tested Environment
-ArchLinux
-Docker version 17.10.0-ce, build f4ffd2511c
+macOS
+Docker version 18.03.1-ce-mac65 (24312)

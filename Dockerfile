@@ -1,5 +1,5 @@
-FROM ruby:2.4.1
-MAINTAINER orumin
+FROM ruby:latest
+MAINTAINER htlsne
 
 ARG WORK_DIR="/home/mikutter"
 
@@ -15,10 +15,19 @@ RUN set -x \
 	  libgirepository1.0-dev \
 	  git \
 	  build-essential \
+      libidn11-dev \
+      locales \
+      sudo \
+      fonts-noto-cjk \
     \
 	&& groupadd --system -g ${USER_ID} ${USER_NAME} \
 	&& useradd -m -s /bin/bash -g ${USER_NAME} -u ${USER_ID} -d ${WORK_DIR} ${USER_NAME} \
 	&& echo ${USER_NAME}:${USER_NAME} | chpasswd
+
+RUN echo ja_JP.UTF-8 UTF-8 >> /etc/locale.gen
+RUN locale-gen
+ENV LC_ALL=ja_JP.UTF-8
+RUN echo "$USER_NAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 USER ${USER_NAME}
 
