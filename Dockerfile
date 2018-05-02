@@ -37,6 +37,13 @@ RUN set -x \
       && cd mikutter \
       && bundle install
 
+RUN mkdir -p ${HOME}/.mikutter/plugin
+RUN cd ${HOME}/.mikutter/plugin && touch ~/.mikutter/plugin/display_requirements.rb && \
+        git clone https://github.com/moguno/mikutter-subparts-image.git && \
+        git clone https://github.com/toshia/mikutter-sub-parts-client.git sub_parts_client && \
+        git clone https://github.com/cobodo/mikutter-worldon.git worldon
+
 WORKDIR ${WORK_DIR}/mikutter
+RUN bundle install
 
 CMD ["/usr/local/bin/bundle", "exec", "/home/mikutter/mikutter/mikutter.rb"]
